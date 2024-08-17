@@ -1,0 +1,37 @@
+{% extends "starter-page-login.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    {% block content001 %}
+
+
+
+        <div class="col-lg-8">
+            <form action="" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row gy-4">
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="username" placeholder="Enter Username Here"  required="">
+                  </div>
+  
+                  <div class="col-md-12">
+                    <input type="password" class="form-control" name="password" placeholder="Enter Password Here" required="">
+                  </div>
+
+                  <div class="col-md-12 text-center">
+                    <button type="submit" style="color: #cda45e; background-color: #0c0b09;  opacity : 0.5; font-weight: bold; font-size: 18px; padding: 15px 400px;">LOGIN</button>
+                  </div>
+  
+                </div>
+              </form>
+            </div>
+
+    {% endblock content001 %}
+</body>
+</html>
