@@ -48,6 +48,7 @@ class Book(models.Model):
     description = models.TextField(blank=True, null=True)
     book_cover = models.ImageField(upload_to="book_cover/", default='book_cover/default_cover.jpg')
     book_upload = models.FileField(upload_to="e-book/", default='e-book/default_book.jpg')
+    rate = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
 
     def __str__(self):
         return f"{self.title} by {self.author}"

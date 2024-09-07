@@ -241,8 +241,9 @@ def add_book(request):
         genre = request.POST['genre']
         copies = request.POST['copies']
         about = request.POST['description']
+        price = request.POST['price']
         
-        book = Book.objects.create(title = title, author = author, isbn = isbn, publication_date = publish, book_cover = b_cover, book_upload = book, genres = genre, copies_available = copies, description = about )
+        book = Book.objects.create(title = title, author = author, isbn = isbn, publication_date = publish, book_cover = b_cover, book_upload = book, genres = genre, copies_available = copies, description = about, rate = price )
         book.save()
         
         return HttpResponse("<script>alert('Book Addeed Successfully');window.location.href='http://127.0.0.1:8000/homepage/';</script>")
