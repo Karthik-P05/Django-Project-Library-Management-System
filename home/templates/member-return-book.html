@@ -1,0 +1,435 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Return Book</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Updated: Jun 27 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <style>
+    /* General styling */
+body {
+  background-color: #1a1814; /* Dark background */
+  color: #ffffff; /* White text */
+}
+
+/* Card styling */
+.card {
+  background-color: #29261f; /* Dark card background */
+  border: 1px solid #cda45e; /* Gold border */
+  border-radius: 10px; /* Rounded corners */
+  color: #ffffff; /* White text */
+}
+
+.card-header {
+  background-color: #29261f; /* Dark header background */
+  color: #cda45e; /* Gold text */
+  border-bottom: 1px solid #cda45e; /* Gold border */
+}
+
+/* Form control styling */
+.form-control {
+  background-color: #1a1814; /* Dark input background */
+  border: 1px solid #cda45e; /* Gold border */
+  color: #ffffff; /* White text */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px; /* Rounded corners */
+}
+
+.form-control:focus {
+  border-color: #cda45e; /* Gold border on focus */
+  box-shadow: 0 0 5px rgba(205, 164, 94, 0.5); /* Gold shadow */
+}
+
+/* Label styling */
+.form-label {
+  color: #cda45e; /* Gold text */
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Button styling */
+.btn-block {
+  background-color: #cda45e; /* Gold background */
+  color: #29261f; /* Dark text */
+  border: 2px solid #cda45e; /* Gold border */
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 30px;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+  width: 100%; /* Make the button full width */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.btn-block:hover {
+  background-color: #29261f; /* Dark background on hover */
+  color: #cda45e; /* Gold text on hover */
+  border-color: #cda45e; /* Gold border on hover */
+  opacity: 1;
+}
+
+/* Table styling */
+.table {
+  color: #ffffff; /* White text */
+}
+
+.table th {
+  color: #cda45e; /* Gold text for table headers */
+}
+
+.table-active {
+  background-color: #29261f; /* Dark background for active row */
+  color: #cda45e; /* Gold text */
+}
+
+/* Spinner styling */
+.spinner-border {
+  color: #cda45e; /* Gold spinner */
+}
+  </style>
+
+</head>
+
+<body class="starter-page-page">
+
+    <header id="header" class="header fixed-top">
+
+        <div class="topbar d-flex align-items-center">
+          <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+              <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+              <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7356 66 55677</span></i>
+            </div>
+            <div class="languages d-none d-md-flex align-items-center">
+              <ul>
+                <li>En</li>
+                <li><a href="#">De</a></li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- End Top Bar -->
+    
+        <div class="branding d-flex align-items-cente">
+    
+          <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+              <!-- Uncomment the line below if you also wish to use an image logo -->
+              <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+              <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1>
+            </a>
+    
+            <nav id="navmenu" class="navmenu">
+              <ul>
+                <li><a href="/memberhomepage">Home<br></a></li>
+                <li><a href="/memberviewwishlist">Whishlist</a></li>
+                <li><a href="/memberebook">E-book</a></li>
+                <li><a href="/viewissuedbook">Issued Books</a></li>
+                <li><a href="/viewborrowingdetails">Borrowing History</a></li>
+                <li><a href="/viewreservations">My Reservations</a></li>
+                <li><a href="/viewfinepayment">Fines & Payments</a></li>
+                <li><a href="/memberprofile">View Profile</a></li>
+              </ul>
+              <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+    
+            <a class="btn-book-a-table d-none d-xl-block" href="/viewbook/{{ borrow_details.book_id_id }}">VIEW BOOK</a>
+    
+          </div>
+    
+        </div>
+    
+      </header>
+
+  <main class="main">
+
+
+    <div class="page-title position-relative" data-aos="fade" style="background-image: url(/static/assets/img/page-title-g.webp);">
+        <div class="container position-relative">
+          <!-- <h1>Starter Page <br></h1> -->
+          <!-- <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p> -->
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="/memberhomepage">Home</a></li>
+              <li><a href="/viewbook/{{ borrow_details.book_id_id }}">{{ borrow_details.book_id.title }}</a></li>
+              <li class="current">Return Book</li>
+            </ol>
+          </nav>
+        </div>
+    </div>
+
+
+
+
+    <div class="container my-5">
+        <h2 class="text-center mb-4" style="color: #cda45e;">Return Book</h2>
+        <div class="card mx-auto shadow-lg" style="max-width: 600px; border: none; border-radius: 15px;">
+            <div class="card-header text-center py-3" style="background: linear-gradient(135deg, #29261f, #cda45e); border-radius: 15px 15px 0 0;">
+                <h4 class="mb-0 text-white" style="font-family: 'Poppins', sans-serif;">Return Details</h4>
+            </div>
+            <div class="card-body text-center p-4" style="background-color: #ffffff;">
+                <!-- Book Cover and Title -->
+                <div class="mb-4">
+                    <img src="{{ borrow_details.book_id.book_cover.url }}" alt="{{ borrow_details.book_id.title }}" class="img-fluid rounded" style="max-width: 120px;">
+                    <h5 class="mt-3" style="font-family: 'Poppins', sans-serif; color: #29261f;">{{ borrow_details.book_id.title }}</h5>
+                    <p class="text-muted" style="font-family: 'Poppins', sans-serif;">{{ borrow_details.book_id.author }}</p>
+                </div>
+    
+                <!-- User Details -->
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <span style="font-family: 'Poppins', sans-serif; color: #29261f;"><strong>Student ID:</strong></span>
+                    <span style="font-family: 'Poppins', sans-serif; color: #555;">{{ borrow_details.member_id.student_id }}</span>
+                </div>
+    
+                <!-- Borrow and Due Dates -->
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <span style="font-family: 'Poppins', sans-serif; color: #29261f;"><strong>Borrowed Date:</strong></span>
+                    <span style="font-family: 'Poppins', sans-serif; color: #555;">{{ borrow_details.borrowed_date|date:"d M Y" }}</span>
+                </div>
+                <div class="mb-3 d-flex justify-content-between align-items-center">
+                    <span style="font-family: 'Poppins', sans-serif; color: #29261f;"><strong>Due Date:</strong></span>
+                    <span style="font-family: 'Poppins', sans-serif; color: #555;">{{ borrow_details.due_date|date:"d M Y" }}</span>
+                </div>
+    
+                <!-- Fine Details -->
+                {% if borrow_details.fine_amount > 0 %}
+                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                        <span style="font-family: 'Poppins', sans-serif; color: #29261f;"><strong>Fine Due:</strong></span>
+                        <span class="text-danger" style="font-family: 'Poppins', sans-serif;">₹ {{ borrow_details.fine_amount }}</span>
+                    </div>
+                {% else %}
+                    <div class="mb-3 d-flex justify-content-between align-items-center">
+                        <span style="font-family: 'Poppins', sans-serif; color: #29261f;"><strong>Fine Due:</strong></span>
+                        <span class="text-success" style="font-family: 'Poppins', sans-serif;">No fine due.</span>
+                    </div>
+                {% endif %}
+    
+                <!-- Buttons -->
+                <div class="d-grid gap-3 mt-4">
+                    {% if borrow_details.fine_amount > 0 %}
+                        <!-- Pay Fine Button -->
+                        <button type="submit" id="pay-fine-btn" class="btn btn-warning btn-lg shadow-sm" style="font-family: 'Poppins', sans-serif; border-radius: 10px; transition: all 0.3s;">
+                            <i class="fas fa-credit-card me-2"></i>Pay Fine and Return Book
+                        </button>
+                        
+                        <!-- Disabled Return Button -->
+                        <!-- <button class="btn btn-danger btn-lg shadow-sm" style="font-family: 'Poppins', sans-serif; border-radius: 10px; opacity: 0.7;" disabled>
+                            <i class="fas fa-undo me-2"></i>Return Book
+                        </button> -->
+                    {% else %}
+                        <!-- Return Button -->
+                        <form method="post" action="{% url 'return_book' borrow_details.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-lg w-100 shadow-sm" style="font-family: 'Poppins', sans-serif; border-radius: 10px; transition: all 0.3s;">
+                                <i class="fas fa-undo me-2"></i>Return Book
+                            </button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="#" class="logo d-flex align-items-center">
+            <span class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+      document.getElementById('pay-fine-btn').onclick = function(e) {
+          e.preventDefault();
+  
+          // Fetch the fine amount from the template
+          const fineAmount = {{ borrow_details.fine_amount }} * 100; // Convert to paise
+          const bookName = "{{ borrow_details.book_id.title }}";
+          const studentId = "{{ borrow_details.member_id.student_id }}";
+  
+          // Create a Razorpay order
+          fetch('/create_razorpay_fine_order/', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+                  'X-CSRFToken': '{{ csrf_token }}'
+              },
+              body: `amount=${fineAmount}&book_name=${bookName}&student_id=${studentId}`
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.order_id) {
+                  // Open Razorpay payment modal
+                  const options = {
+                      key: 'rzp_test_bgOiUnm7YgSzuu', // Your Razorpay API Key
+                      amount: fineAmount,
+                      currency: 'INR',
+                      name: 'Library Management System',
+                      description: `Fine for ${bookName}`,
+                      order_id: data.order_id,
+                      handler: function(response) {
+                          // Handle successful payment
+                          fetch('/verify_fine_payment/', {
+                              method: 'POST',
+                              headers: {
+                                  'Content-Type': 'application/x-www-form-urlencoded',
+                                  'X-CSRFToken': '{{ csrf_token }}'
+                              },
+                              body: `razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}&book_name=${bookName}&student_id=${studentId}&fine_amount=${fineAmount}`
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                              if (data.status === 'success') {
+                                  alert('Payment successful!');
+                                  //window.location.reload(); // Reload the page to update the UI
+                                  window.location.href = '/viewbook/{{ borrow_details.book_id_id }}';
+                              } else {
+                                  alert('Payment verification failed: ' + data.message);
+                              }
+                          });
+                      },
+                      theme: {
+                          color: '#cda45e'
+                      }
+                  };
+                  const rzp = new Razorpay(options);
+                  rzp.open();
+              } else {
+                  alert('Failed to create Razorpay order: ' + data.error);
+              }
+          });
+      };
+  </script>
+
+
+</body>
+
+</html>

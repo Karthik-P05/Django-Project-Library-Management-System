@@ -1,0 +1,667 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>View Librarian list</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Gp
+  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
+  * Updated: Jun 29 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <style>
+    .book-cell {
+        display: flex;
+        align-items: center;
+    }
+    .book-cell img {
+        margin-right: 10px;
+    }
+</style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  
+</head>
+
+<body class="starter-page-page">
+
+  
+
+  <!-- <header id="header" class="header d-flex align-items-center position-relative" style="background-color: #0c0b09;">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+        Uncomment the line below if you also wish to use an image logo
+        <img src="{% static 'assets/img/logo.png' %}" alt="">
+        <h1 class="" style="line-height: 0.9;">Library<br>Management<br>System</h1>
+        <span>.</span>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="#hero">Home<br></a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#team">Team</a></li>
+          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="#">Dropdown 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="#">Deep Dropdown 1</a></li>
+                  <li><a href="#">Deep Dropdown 2</a></li>
+                  <li><a href="#">Deep Dropdown 3</a></li>
+                  <li><a href="#">Deep Dropdown 4</a></li>
+                  <li><a href="#">Deep Dropdown 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Dropdown 2</a></li>
+              <li><a href="#">Dropdown 3</a></li>
+              <li><a href="#">Dropdown 4</a></li>
+            </ul>
+          </li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <a class="btn-getstarted" href="\homepage" style="color: #cda45e;">BACK</a>
+
+    </div>
+  </header> -->
+
+
+  <header id="header" class="header fixed-top position-relative">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7355 66 55677</span></i>
+        </div>
+        <div class="languages d-none d-md-flex align-items-center">
+          <ul>
+            <li>En</li>
+            <li><a href="#">De</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-center">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+          <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1><br>
+          <!-- <h1 class="sitename">Restaurantly</h1> -->
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/homepage">Home<br></a></li>
+            <li><a href="/borrowing_list">Borrowing Details</a></li>
+            <li><a href="/puchased_books">Purchased Books</a></li>
+            <li><a href="/returned_books">Returned Books</a></li>
+            <li><a href="/admin_issuedbooks">Issued Books</a></li>
+            <li><a href="/admin_overdue_books">Overdue Books </a></li>
+            <li><a href="/change_password">Change Password</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-book-a-table d-none d-xl-block" href="/adminaddlibrarian">BACK</a>
+
+      </div>
+
+    </div>
+
+  </header>
+  
+
+  <main class="main">
+
+
+    
+
+    <!-- Starter Section Section -->
+    <section id="starter-section" class="starter-section section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Admin</h2>
+        <p>View Librarian Details<br></p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up">
+        <!-- <p>Use this page as a starter for your own custom pages.</p> -->
+        
+      </div>
+
+    </section><!-- /Starter Section Section -->
+
+
+
+    <section class="py-4">
+        <div class="container">
+    
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="container-fluid table-responsive">
+                        <div class="text-end mb-3">
+                            
+                            <!-- <button class="btn btn-sm btn-primary rounded-0 bg-gradient-primary" ><i class="bi bi-plus-lg"></i> <a href="\adminaddmembers" style="color: white;">Add New</a></button> -->
+                        </div>
+                        <table class="display table table-striped" id="LibrarianTable" style="text-align: center;">
+                            <colgroup>
+                                <col width="5%">
+                                <col width="20%">
+                                <col width="30%">
+                                <col width="25%">
+                                <col width="15%">
+                                <col width="10%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Email</th>
+                                    <th class="text-center">Phone Number</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for librarian in librarians %}
+                                <tr>
+                                    <td class="boo-cell text-center">{{ forloop.counter }}</td>
+                                    <td>
+                                      <div class="d-flex align-items-center">
+                                        <img src="{{ librarian.profile_picture.url }}" 
+                                            class="rounded me-2" 
+                                            width="40"
+                                            height="55" 
+                                            alt="Image Not Found">
+                                        <div>
+                                            <div><strong>{{ librarian.librarian_id.first_name }} {{librarian.librarian_id.last_name }}</strong></div><br>
+                                            
+                                        </div>
+                                      </div>
+                                      <!-- {{ librarian.librarian_id.first_name}} {{ librarian.librarian_id.last_name}} -->
+                                    </td>
+                                    <td>{{ librarian.librarian_id.email }}</td>
+                                    <td>{{ librarian.phone_number }}</td>
+                                    <td>
+                                        {% if librarian.status == 1 %}
+                                        <span class="badge badge-success bg-gradient bg-success px-3 rounded-pill bg-opacity-75 text-sm py-1">Active</span> 
+
+                                        {% else %}
+                                        <span class="badge badge-danger bg-gradient bg-danger px-3 rounded-pill bg-opacity-75 text-sm py-1">Blocked</span> 
+                                        
+
+                                        {% endif %}
+                                    </td>
+
+                                   
+
+                                    <td class="text-center">
+                                        <div class="dropdown dropup">
+                                            <button class="btn btn-light btn-sm rounded-0 border dropdown-toggle" type="button" id="dropdownMenuButton{{ book.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ librarian.id }}">
+                                                {% if librarian.status %}
+                                                <li><a class="dropdown-item text-danger deactivate-btn" href="{% url 'librarian_status' librarian.id %}" data-id="{{ librarian.id }}"><i class="bi bi-power text-secondary"></i> Deactivate</a></li>
+                                                {% else %}
+                                                <li><a class="dropdown-item text-success activate-btn" href="{% url 'librarian_status' librarian.id %}" data-id="{{ librarian.id }}"><i class="bi bi-check2-all text-success"></i> Activate</a></li>
+                                                {% endif %}
+                                               
+                                                <li><a class="dropdown-item edit-librarian" href="#" data-bs-toggle="modal" data-bs-target="#editModal" data-librarian.id="{{ librarian.id }}"><i class="bi bi-pencil text-primary"></i> Edit</a></li>
+                                                <li><a class="dropdown-item view-librarian" href="#" data-bs-toggle="modal" data-bs-target="#viewModal{{ librarian.id }}"><i class="bi bi-eye text-dark"></i> View</a></li>
+                                                <li><a class="dropdown-item delete-librarian" href="javascript:void(0)"onclick="confirmDeleteLibrarian('{% url 'delete_librarian' librarian.id %}', '{{ librarian.librarian_id.get_full_name }}')"><i class="bi bi-trash"></i> Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <!-- View Modal -->
+                                <div class="modal fade" id="viewModal{{ librarian.id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Librarian Details</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            
+                                            <!-- Modal Body -->
+                                            <div class="modal-body">
+                                                <!-- Profile Picture -->
+                                                <div class="text-center mb-3">
+                                                    {% if librarian.profile_picture %}
+                                                        <img src="{{ librarian.profile_picture.url }}" 
+                                                             alt="Profile" 
+                                                             class="rounded-circle mb-2" 
+                                                             style="width: 100px; height: 100px; object-fit: cover;">
+                                                    {% else %}
+                                                        <div class="rounded-circle bg-light d-inline-flex align-items-center justify-content-center mb-2" 
+                                                             style="width: 100px; height: 100px;">
+                                                            <i class="bi bi-person fs-1 text-muted"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                    <h5>{{ librarian.librarian_id.get_full_name }}</h5>
+                                                </div>
+                                
+                                                <!-- Details -->
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <p><strong>Email:</strong><br>{{ librarian.librarian_id.email }}</p>
+                                                        <p><strong>Phone:</strong><br>{{ librarian.phone_number|default:"-" }}</p>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <p><strong>Status:</strong><br>
+                                                            {% if librarian.status == 1 %}
+                                                                <span class="badge bg-success">Active</span>
+                                                            {% else %}
+                                                                <span class="badge bg-danger">Inactive</span>
+                                                            {% endif %}
+                                                        </p>
+                                                        <p><strong>Joined:</strong><br>{{ librarian.librarian_id.date_joined|date:"M d, Y" }}</p>
+                                                    </div>
+                                                </div>
+                                
+                                                <!-- Address -->
+                                                <div class="mb-3">
+                                                    <p><strong>Address:</strong></p>
+                                                    <div class="bg-light p-2 rounded">
+                                                        {{ librarian.address|default:"Not specified"|linebreaksbr }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                
+                                            <!-- Modal Footer -->
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Librarian</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form>
+                                            <div class="modal-body">
+                                                {% csrf_token %}
+
+                                                <input type="hidden" id="edit-librarian-id"  value="{{ librarian.id }}">
+                                                <div class="mb-3">
+                                                    <label class="form-label">First Name</label>
+                                                    <input type="text" class="form-control" id="edit-first-name">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Last Name</label>
+                                                    <input type="text" class="form-control" id="edit-last-name">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="edit-email">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Phone</label>
+                                                    <input type="text" class="form-control" id="edit-phone">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Address</label>
+                                                    <textarea class="form-control" id="edit-address" rows="3"></textarea>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary" id="save-librarian-changes">Save Changes</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                
+
+
+                                
+  
+                               
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function() {
+            $('#LibrarianTable').DataTable();
+          
+            
+          });
+    </script>
+
+
+    <script>
+       // Delete Confirmation Function
+function confirmDeleteLibrarian(url, librarianName) {
+    Swal.fire({
+        title: 'Delete Librarian?',
+        html: `Are you sure you want to delete <strong>${librarianName}</strong>?<br><br>This action cannot be undone!`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'Cancel',
+        reverseButtons: true,
+        backdrop: `
+            rgba(0,0,0,0.7)
+            url("/static/images/warning-icon.png")
+            center top
+            no-repeat
+        `
+    }).then((result) => {
+        if (result.isConfirmed) {
+            deleteLibrarian(url);
+        }
+    });
+}
+
+// AJAX Delete Function
+function deleteLibrarian(url) {
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        beforeSend: function() {
+            Swal.fire({
+                title: 'Processing...',
+                html: 'Please wait while we delete the librarian',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+        },
+        success: function(response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Deleted!',
+                text: 'The librarian has been deleted',
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => {
+                // Reload the page or update the table
+                location.reload();
+            });
+        },
+        error: function(xhr) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed!',
+                text: xhr.responseJSON?.error || 'Could not delete librarian',
+            });
+        }
+    });
+}
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+        
+            // Edit Librarian
+            $(document).on('click','.edit-librarian', function() {
+                const librarianId = $(this).data('librarian.id');
+                $.ajax({
+                    url: `/librarians/${librarianId}/edit/`,
+                    type: 'GET',
+                    success: function(response) {
+
+                        $('#edit-Librarian-Id').val(response.id);
+                       
+                        $('#edit-first-name').val(response.first_name);
+                        $('#edit-last-name').val(response.last_name);
+                        $('#edit-email').val(response.user?.email || response.email);
+
+                        
+                        $('#edit-phone').val(response.phone);
+                        $('#edit-address').val(response.address);
+                        
+                        
+                        
+                        $('#editModal').modal('show');
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: xhr.responseJSON?.error || 'Failed to load Librarian data',
+                        });
+                    }
+            });
+        });
+
+    });
+
+        
+           
+        
+            // Save Edited Librarian
+            $('#save-librarian-changes').click(function() {
+                var librarianId = $('#edit-librarian-id').val();
+
+                const data = {
+                    librarian_id: $('#edit-librarian-id').val(),
+                    first_name: $('#edit-first-name').val(),
+                    last_name: $('#edit-last-name').val(),
+                    email: $('#edit-email').val(),
+                    phone: $('#edit-phone').val(),
+                    address: $('#edit-address').val(),
+                };
+        
+                $.ajax({
+                    url: `/librarians/${librarianId}/update/`,
+                    type: 'POST',
+                    data: data,
+                    success: function() {
+                        $('#editModal').modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Librarian updated successfully'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    },
+                    error: function(xhr) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: xhr.responseJSON?.error || 'Update failed',
+                        });
+                    }
+                });
+            });
+        
+        
+      </script>
+
+      <script>
+        // Add this if you want confirmation dialogs
+document.querySelectorAll('.activate-btn, .deactivate-btn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isActivating = this.classList.contains('activate-btn');
+        const action = isActivating ? 'activate' : 'deactivate';
+        
+        Swal.fire({
+            title: `Confirm ${action}`,
+            text: `Are you sure you want to ${action} this member?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: `Yes, ${action}`,
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = this.href;
+            }
+        });
+    });
+});
+      </script>
+    
+
+
+  </main>
+
+
+
+
+  <footer id="footer" class="footer dark-background">
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="#" class="logo d-flex align-items-center">
+              <span class="sitename">Library<br>Management<br>System</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+            <div class="social-links d-flex mt-4">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#"> Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+            <form action="forms/newsletter.php" method="post" class="php-email-form">
+              <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+              <div class="loading">Loading</div>
+              <div class="error-message"></div>
+              <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container text-center">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">GP</strong> <span>All Rights Reserved</span></p>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

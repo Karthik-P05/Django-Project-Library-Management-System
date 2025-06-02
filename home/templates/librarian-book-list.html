@@ -1,0 +1,637 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Total Book List</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Updated: Jun 27 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    .book-cell {
+        display: flex;
+        align-items: center;
+    }
+    .book-cell img {
+        margin-right: 10px;
+    }
+</style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables CSS and JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+</head>
+
+<body class="starter-page-page">
+
+  <header id="header" class="header fixed-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7356 66 55677</span></i>
+        </div>
+        <div class="languages d-none d-md-flex align-items-center">
+          <ul>
+            <li>En</li>
+            <li><a href="#">De</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+          <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1><br>
+
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+              <li><a href="{% url 'librarian_homepage' %}">Home<br></a></li>
+            <li><a href="{% url 'librarian_borrowing_list' %}">Borrowing Details</a></li>
+            <li><a href="{% url 'librarian_purchased_books' %}">Purchased Books</a></li>
+            <li><a href="{% url 'librarian_returned_booksview' %}">Returned Books</a></li>
+            <li><a href="{% url 'librarian_issued_books' %}">Issued Books</a></li>
+            <li><a href="{% url 'librarianprofile' %}">View Profile</a></li>
+            <li><a href="{% url 'librarian_changepassword' %}">Change Password</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </nav>
+
+        <a class="btn-book-a-table d-none d-xl-block" href="/librarianhomepage">Back</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+    <!-- Starter Section Section -->
+    <section id="starter-section" class="starter-section section">
+    <!-- Page Title -->
+    <div class="page-title position-relative" data-aos="fade" style="background-image: url(/static/assets/img/pae-title-bg.webp);">
+      <div class="container position-relative">
+        <h1>Books Details <br></h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'librarian_homepage' %}">Home</a></li>
+            <li class="current">View Books</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+
+
+     
+       
+            <div class="container">
+        
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="text-end mb-3">
+                            <button class="btn btn-primary btn-add-new rounded-pill px-4 py-2 shadow-sm" onclick="window.location.href='/librarianaddbook'">
+                                <i class="bi bi-journal-plus"></i>
+                                <span class="fw-semibold">Add a New Book</span>
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                        
+                            <div class="text-end mb-3">
+                                <label for="genreFilter">Filter by Genre:</label>
+                                    <select id="genreFilter">
+                                    <option value="">All Genres</option>
+                                    <option value="Architecture">Architecture</option>
+                                    <option value="Archaeology">Archaeology</option>
+                                    <option value="Astronomy & Space">Astronomy & Space</option>
+                                    <option value="Automotive">Automotive</option>
+                                    <option value="Biology">Biology</option>
+                                    <option value="Biography">Biography</option>
+                                    <option value="Career">Career</option>
+                                    <option value="Chemistry">Chemistry</option>
+                                    <option value="Classic Literature">Classic Literature</option>
+                                    <option value="Craft & Hobbies">Craft & Hobbies</option>
+                                    <option value="Drama">Drama</option>
+                                    <option value="Economic">Economic</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Environment">Environment</option>
+                                    <option value="Fashion & Beauty">Fashion & Beauty</option>
+                                    <option value="Fiction">Fiction</option>
+                                    <option value="Finance">Finance</option>
+                                    <option value="Fitness & Diet">Fitness & Diet</option>
+                                    <option value="Food & Nutrition">Food & Nutrition</option>
+                                    <option value="Graphic Design">Graphic Design</option>
+                                    <option value="Hardware">Hardware</option>
+                                    <option value="Historical Fiction">Historical Fiction</option>
+                                    <option value="History">History</option>
+                                    <option value="Home & Garden">Home & Garden</option>
+                                    <option value="Horror">Horror</option>
+                                    <option value="Internet">Internet</option>
+                                    <option value="Language">Language</option>
+                                    <option value="Law">Law</option>
+                                    <option value="Leadership">Leadership</option>
+                                    <option value="Literature">Literature</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Math">Math</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Music">Music</option>
+                                    <option value="Mystery & Crime">Mystery & Crime</option>
+                                    <option value="Painting & Drawing">Painting & Drawing</option>
+                                    <option value="Philosophy">Philosophy</option>
+                                    <option value="Photography">Photography</option>
+                                    <option value="Physics">Physics</option>
+                                    <option value="Politics">Politics</option>
+                                    <option value="Poetry">Poetry</option>
+                                    <option value="Programming">Programming</option>
+                                    <option value="Psychology">Psychology</option>
+                                    <option value="Relationships">Relationships</option>
+                                    <option value="Religion">Religion</option>
+                                    <option value="Romance">Romance</option>
+                                    <option value="Science Fiction">Science Fiction</option>
+                                    <option value="Self-improvement">Self-improvement</option>
+                                    <option value="Sociology">Sociology</option>
+                                    <option value="Software">Software</option>
+                                    <option value="Spirituality">Spirituality</option>
+                                    <option value="Story">Story</option>
+                                    <option value="Time Management">Time Management</option>
+                                    <option value="Travel">Travel</option>
+                                    <option value="Tutorials">Tutorials</option>
+                                    <option value="Web Design">Web Design</option>
+                                    </select>
+                                <!-- <button class="btn btn-sm btn-primary rounded-0 bg-gradient-primary" ><i class="bi bi-plus-lg"></i> <a href="\adminaddmembers" style="color: white;">Add New</a></button> -->
+                            </div>
+                            <table class="table table-hover table-sm table-striped" id="bookTable" >
+                                <!-- <colgroup>
+                                    <col width="5%">
+                                    <col width="15%">
+                                    <col width="20%">
+                                    <col width="35%">
+                                    <col width="15%">
+                                    <col width="10%">
+                                </colgroup> -->
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Book Title</th>
+                                        <th class="text-center">ISBN</th>
+                                        <th class="text-center">Publication Date</th>
+                                        <th class="text-center">Genre</th>
+                                        <th class="text-center">Copies Available</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for book in books %}
+                                    <tr>
+                                        <td class="boo-cell text-center">{{ forloop.counter }}</td>
+                                        <td>
+                                            <!-- <img src="{{ book.book_cover.url }}" alt="{{ book.title }}" width="100">
+                                            <br> -->
+                                            <!-- {{ book.title}} -->
+                                            <div class="d-flex align-items-center">
+                                                <img src="{{ book.book_cover.url }}" 
+                                                     class="rounded me-2" 
+                                                     width="40" 
+                                                     alt="{{ book.title }}">
+                                                <div>
+                                                    <strong>{{ book.title }}</strong><br>
+                                                    <small class="text-muted">{{ book.author }}</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{ book.isbn }}</td>
+                                        <td>{{ book.publication_date }}</td>
+                                        <td>{{ book.genres }}</td>
+                                        <td>{{ book.copies_available }}</td>
+    
+                                        <!-- <td class="text-center">
+                                            <div class="dropdown dropup">
+                                                <button class="btn btn-light btn-sm rounded-0 border dropdown-toggle" type="button" id="dropdownMenuButton{{ book.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Action
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ book.id }}">
+                                                    
+                                                    <li><a class="dropdown-item activate-data" href="/adminactivatemember/{{ student.id }}" data-url=""><i class="bi bi-check2-all text-success"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item view-data" href="#" data-bs-toggle="modal" data-bs-target="#viewModal{{ student.id }}"><i class="bi bi-eye text-dark"></i> View</a></li>
+                                                    <li><a class="dropdown-item delete-data" href="javascript:void(0)" onclick="confirmDelete('/admindeletemember/{{ student.id }}')"><i class="bi bi-trash text-danger"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td> -->
+    
+                                        <td class="text-center">
+                                            <div class="dropdown dropup">
+                                                <button class="btn btn-light btn-sm rounded-0 border dropdown-toggle" type="button" id="dropdownMenuButton{{ book.id }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Action
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton{{ book.id }}">
+                                                    <li><a class="dropdown-item view-data" href="#" data-bs-toggle="modal" data-bs-target="#viewBookModal" data-book-id="{{ book.id }}"><i class="bi bi-eye text-dark"></i> View</a></li>
+                                                    <li><a class="dropdown-item edit-data" href="#" data-bs-toggle="modal" data-bs-target="#editBookModal" data-book-id="{{ book.id }}"><i class="bi bi-pencil text-primary"></i> Edit</a></li>
+                                                    <li><a class="dropdown-item delete-data" href="#" data-book-id="{{ book.id }}"><i class="bi bi-trash text-danger"></i> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+        
+                                    <!-- Modal for each student -->
+    
+                                    <!-- View Book Details Modal -->
+                                    <div class="modal fade" id="viewBookModal" tabindex="-1" aria-labelledby="viewBookModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="viewBookModalLabel">View Book Details</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <img id="viewBookCover" src="" alt="Book Cover" class="img-fluid">
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <p><strong>Title:</strong> <span id="viewBookTitle"></span></p>
+                                                            <p><strong>Author:</strong> <span id="viewBookAuthor"></span></p>
+                                                            <p><strong>ISBN:</strong> <span id="viewBookISBN"></span></p>
+                                                            <p><strong>Publication Date:</strong> <span id="viewBookPublicationDate"></span></p>
+                                                            <p><strong>Genre:</strong> <span id="viewBookGenre"></span></p>
+                                                            <p><strong>Copies Available:</strong> <span id="viewBookCopiesAvailable"></span></p>
+                                                            <p><strong>Description:</strong> <span id="viewBookDescription"></span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <!-- Edit Book Details Modal -->
+                                    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editBookModalLabel">Edit Book Details</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="editBookForm">
+                                                        <div class="mb-3">
+                                                            <label for="editBookTitle" class="form-label">Title</label>
+                                                            <input type="text" class="form-control" id="editBookTitle" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookAuthor" class="form-label">Author</label>
+                                                            <input type="text" class="form-control" id="editBookAuthor" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookISBN" class="form-label">ISBN</label>
+                                                            <input type="text" class="form-control" id="editBookISBN" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookPublicationDate" class="form-label">Publication Date</label>
+                                                            <input type="date" class="form-control" id="editBookPublicationDate" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookGenre" class="form-label">Genre</label>
+                                                            <input type="text" class="form-control" id="editBookGenre" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookCopiesAvailable" class="form-label">Copies Available</label>
+                                                            <input type="number" class="form-control" id="editBookCopiesAvailable" required>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="editBookDescription" class="form-label">Description</label>
+                                                            <textarea class="form-control" id="editBookDescription" rows="3"></textarea>
+                                                        </div>
+                                                        <input type="hidden" id="editBookId">
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary" id="saveBookChanges">Save changes</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+    
+                                    
+      
+                                   
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <script>
+            $(document).ready(function() {
+                var table = $('#bookTable').DataTable();
+              
+                $('#genreFilter').on('change', function() {
+                  var genre = $(this).val();
+              
+                  if (genre) {
+                    table.columns(4).search('^' + genre + '$', true, false).draw(); // 4 is the index of the "Genre" column
+                  } else {
+                    table.columns(4).search('').draw(); // Show all data when no filter
+                  }
+                });
+              });
+    
+    
+    
+              // View Book Details
+            $(document).on('click', '.view-data', function () {
+                var bookId = $(this).data('book-id');
+    
+            // Fetch book details via AJAX
+                $.ajax({
+                    url: `/get-book-details/${bookId}/`,
+                    method: 'GET',
+                    success: function (response) {
+                        $('#viewBookTitle').text(response.title);
+                        $('#viewBookAuthor').text(response.author);
+                        $('#viewBookISBN').text(response.isbn);
+                        $('#viewBookPublicationDate').text(response.publication_date);
+                        $('#viewBookGenre').text(response.genres);
+                        $('#viewBookCopiesAvailable').text(response.copies_available);
+                        $('#viewBookDescription').text(response.description);
+                        $('#viewBookCover').attr('src', response.book_cover);
+                    },
+                    error: function (error) {
+                        console.error('Error fetching book details:', error);
+                    }
+                });
+            });
+    
+    
+    
+    
+                // Edit Book Details
+                $(document).on('click', '.edit-data', function () {
+                    var bookId = $(this).data('book-id');
+    
+                    // Fetch book details via AJAX
+                    $.ajax({
+                        url: `/get-book-details/${bookId}/`,
+                        method: 'GET',
+                        success: function (response) {
+                            $('#editBookTitle').val(response.title);
+                            $('#editBookAuthor').val(response.author);
+                            $('#editBookISBN').val(response.isbn);
+                            $('#editBookPublicationDate').val(response.publication_date);
+                            $('#editBookGenre').val(response.genres);
+                            $('#editBookCopiesAvailable').val(response.copies_available);
+                            $('#editBookDescription').val(response.description);
+                            $('#editBookId').val(bookId);
+                        },
+                        error: function (error) {
+                            console.error('Error fetching book details:', error);
+                        }
+                    });
+                });
+    
+            // Save Edited Book Details
+            $('#saveBookChanges').on('click', function () {
+                var bookId = $('#editBookId').val();
+                var formData = {
+                    title: $('#editBookTitle').val(),
+                    author: $('#editBookAuthor').val(),
+                    isbn: $('#editBookISBN').val(),
+                    publication_date: $('#editBookPublicationDate').val(),
+                    genres: $('#editBookGenre').val(),
+                    copies_available: $('#editBookCopiesAvailable').val(),
+                    description: $('#editBookDescription').val()
+                };
+    
+                // Save changes via AJAX
+                $.ajax({
+                    url: `/update-book/${bookId}/`,
+                    method: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: 'Book details updated successfully!',
+                        }).then(() => {
+                            $('#editBookModal').modal('hide');
+                            location.reload(); // Reload the page to reflect changes
+                        });
+                    },
+                    error: function (error) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error!',
+                            text: 'Failed to update book details.',
+                        });
+                    }
+                });
+            });
+    
+    
+            
+            // Delete Book
+            $(document).on('click', '.delete-data', function () {
+                var bookId = $(this).data('book-id');
+    
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You will not be able to recover this book!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Delete book via AJAX
+                        $.ajax({
+                            url: `/delete-book/${bookId}/`,
+                            method: 'POST',
+                            success: function (response) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted!',
+                                    text: 'Book deleted successfully!',
+                                }).then(() => {
+                                    location.reload(); // Reload the page to reflect changes
+                                });
+                            },
+                            error: function (error) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error!',
+                                    text: 'Failed to delete book.',
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+    
+    
+              
+          </script>
+
+
+
+     
+      
+      
+
+
+   <!-- SweetAlert CDN -->
+
+    
+
+
+
+
+      <!-- <div class="container" data-aos="fade-up">
+        <p>Use this page as a starter for your own custom pages.</p>
+      </div> -->
+
+    </section><!-- /Starter Section Section -->
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="#" class="logo d-flex align-items-center">
+            <span class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

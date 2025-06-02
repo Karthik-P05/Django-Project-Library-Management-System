@@ -1,0 +1,1026 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Book View</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Updated: Jun 27 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+<style>
+
+  #descriptionWrapper {
+    max-height: 6em; /* Adjust this value to fit approximately 4 lines of text */
+    overflow: hidden;
+    position: relative;
+    text-overflow: ellipsis;
+  }
+  
+  #descriptionWrapper.expanded {
+    max-height: none;
+  }
+  
+  .toggle-btn {
+
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+  }
+
+  
+
+
+
+
+  /* Custom CSS for Reviews */
+.list-group-item {
+  border: 1px solid #e9ecef; /* Light border */
+}
+
+.text-warning {
+  color: #ffc107; /* Bootstrap's warning color for stars */
+}
+
+.rounded-circle {
+  border: 2px solid #e9ecef; /* Optional: Add a border to the profile picture */
+}
+
+
+
+
+
+
+
+ /* Card styling */
+.bg-light {
+    background-color: #1a1814 !important; /* Dark background */
+    border: 1px solid #cda45e; /* Gold border */
+    border-radius: 10px; /* Rounded corners */
+    color: #ffffff; /* White text */
+}
+
+/* Pills navs styling */
+.nav-pills .nav-link {
+    background-color: #1a1814; /* Dark background */
+    color: #cda45e; /* Gold text */
+    border: 1px solid #cda45e; /* Gold border */
+    border-radius: 5px; /* Rounded corners */
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #cda45e; /* Gold background */
+    color: #1a1814; /* Dark text */
+    border: 1px solid #cda45e; /* Gold border */
+}
+
+/* Review Form Styling */
+.bg-white {
+    background-color: #1a1814 !important; /* Dark background */
+    border: 1px solid #cda45e; /* Gold border */
+    border-radius: 10px; /* Rounded corners */
+    color: #ffffff; /* White text */
+}
+
+/* Star Rating Styling */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 1.5rem;
+    color: #6c757d; /* Gray stars */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #cda45e; /* Gold stars for selected/hovered */
+}
+
+/* Form Control Styling */
+.form-control {
+    background-color: #1a1814; /* Dark background */
+    border: 1px solid #cda45e; /* Gold border */
+    color: #ffffff; /* White text */
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.form-control:focus {
+    border-color: #cda45e; /* Gold border on focus */
+    box-shadow: 0 0 5px rgba(205, 164, 94, 0.5); /* Gold shadow */
+}
+
+/* Label Styling */
+.form-label {
+    color: #cda45e; /* Gold text */
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Button Styling */
+.btn-primary {
+    background-color: #1a1814; /* Dark background */
+    color: #cda45e; /* Gold text */
+    border: 2px solid #cda45e; /* Gold border */
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px 30px;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+    width: 100%; /* Make the button full width */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.btn-primary:hover {
+    background-color: #cda45e; /* Gold background on hover */
+    color: #1a1814; /* Dark text on hover */
+    border-color: #1a1814; /* Dark border on hover */
+    opacity: 1;
+}
+
+/* Review List Styling */
+.list-group-item {
+    background-color: #1a1814; /* Dark background */
+    border: 1px solid #cda45e; /* Gold border */
+    border-radius: 10px; /* Rounded corners */
+    margin-bottom: 1rem; /* Spacing between reviews */
+    color: #ffffff; /* White text */
+}
+
+.text-primary {
+    color: #cda45e !important; /* Gold text for usernames */
+}
+
+.text-warning {
+    color: orange !important; /* Gold stars */
+}
+
+.alert-info {
+    background-color: #2a2723 !important; /* Darker background for no reviews message */
+    border-color: #cda45e !important; /* Gold border */
+    color: #cda45e !important; /* Gold text */
+}
+
+
+
+
+
+/*similar items*/
+
+/* Custom CSS for Similar Items Section */
+.similar-items .img-thumbnail {
+  border: 2px solid #cda45e; /* Gold border for the image */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.similar-items .img-thumbnail:hover {
+  transform: scale(1.05); /* Slightly enlarge the image on hover */
+  box-shadow: 0 4px 8px rgba(205, 164, 94, 0.3); /* Gold shadow on hover */
+}
+
+.similar-items .nav-link {
+  color: #ffffff; /* White text color for the title and author */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.2s ease;
+}
+
+.similar-items .nav-link:hover {
+  color: #cda45e; /* Gold text color on hover */
+}
+
+.similar-items .text-dark {
+  color: #cda45e !important; /* Gold color for the price */
+  font-weight: bold; /* Make the price bold */
+}
+
+.similar-items .alert-info {
+  background-color: #2a2723; /* Dark background for the alert */
+  border-color: #cda45e; /* Gold border for the alert */
+  color: #cda45e; /* Gold text for the alert */
+}
+
+.similar-items .card {
+  background-color: #1a1814; /* Dark background for the card */
+  border: 1px solid #cda45e; /* Gold border for the card */
+  box-shadow: 0 4px 8px rgba(205, 164, 94, 0.3); /* Gold shadow for the card */
+}
+
+.similar-items .card-title {
+  font-size: 1.25rem; /* Larger font size for the title */
+  font-weight: bold; /* Bold font for the title */
+  margin-bottom: 1.5rem; /* Add spacing below the title */
+  color: #cda45e; /* Gold color for the title */
+}
+
+.similar-items .card-body {
+  background-color: #1a1814; /* Dark background for the card body */
+  color: #ffffff; /* White text color */
+}
+
+
+
+
+
+#full-stars-example {
+
+  /* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+  .rating-group {
+    display: inline-flex;
+  }
+  
+  /* make hover effect work properly in IE */
+  .rating__icon {
+    pointer-events: none;
+  }
+  
+  /* hide radio inputs */
+  .rating__input {
+   position: absolute !important;
+   left: -9999px !important;
+  }
+
+  /* set icon padding and size */
+  .rating__label {
+    cursor: pointer;
+    padding: 0 0.1em;
+    font-size: 2rem;
+  }
+  
+  /* set default star color */
+  .rating__icon--star {
+    color: orange;
+  }
+  
+  /* set color of none icon when unchecked */
+  .rating__icon--none {
+    color: #eee;
+  }
+
+  /* if none icon is checked, make it red */
+  .rating__input--none:checked + .rating__label .rating__icon--none {
+    color: red;
+  }
+
+  /* if any input is checked, make its following siblings grey */
+  .rating__input:checked ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+
+  /* make all stars orange on rating group hover */
+  .rating-group:hover .rating__label .rating__icon--star {
+    color: orange;
+  }
+
+  /* make hovered input's following siblings grey on hover */
+  .rating__input:hover ~ .rating__label .rating__icon--star {
+    color: #ddd;
+  }
+  
+  /* make none icon grey on rating group hover */
+  .rating-group:hover .rating__input--none:not(:hover) + .rating__label .rating__icon--none {
+     color: #eee;
+  }
+
+  /* make none icon red on hover */
+  .rating__input--none:hover + .rating__label .rating__icon--none {
+    color: red;
+  }
+}
+
+  
+</style>
+
+  
+</head>
+
+<body class="starter-page-page">
+
+    <header id="header" class="header fixed-top">
+
+        <div class="topbar d-flex align-items-center">
+          <div class="container d-flex justify-content-center justify-content-md-between">
+            <div class="contact-info d-flex align-items-center">
+              <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+              <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7356 66 55677</span></i>
+            </div>
+            <div class="languages d-none d-md-flex align-items-center">
+              <ul>
+                <li>En</li>
+                <li><a href="#">De</a></li>
+              </ul>
+            </div>
+          </div>
+        </div><!-- End Top Bar -->
+    
+        <div class="branding d-flex align-items-cente">
+    
+          <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+              <!-- Uncomment the line below if you also wish to use an image logo -->
+              <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+              <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1>
+            </a>
+    
+            <nav id="navmenu" class="navmenu">
+              <ul>
+                <li><a href="/memberhomepage">Home<br></a></li>
+                <li><a href="/memberviewwishlist">Whishlist</a></li>
+                <li><a href="/memberebook">E-book</a></li>
+                <li><a href="/viewissuedbook">Issued Books</a></li>
+                <li><a href="/viewborrowingdetails">Borrowing History</a></li>
+                <li><a href="/viewreservations">My Reservations</a></li>
+                <li><a href="/viewfinepayment">Fines & Payments</a></li>
+                <li><a href="/memberprofile">View Profile</a></li>
+              </ul>
+              <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+    
+            <a class="btn-book-a-table d-none d-xl-block" href="/searchresult/">Back to Search</a>
+            <!-- <a class="btn-book-a-table d-none d-xl-block" href="/memberhomepage/">HOME</a> -->
+    
+          </div>
+    
+        </div>
+    
+      </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title position-relative" data-aos="fade" style="background-image: url(/static/assets/img/page-title-g.webp);">
+      <div class="container position-relative">
+        <!-- <h1>Starter Page <br></h1> -->
+        <!-- <p>Esse dolorum voluptatum ullam est sint nemo et est ipsa porro placeat quibusdam quia assumenda numquam molestias.</p> -->
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/memberhomepage">Home</a></li>
+            <!-- <li><a href="">{{book.genres}}</a></li> -->
+            <li class="current">{{ book.title }}</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Starter Section Section -->
+    <!-- <section id="starter-section" class="starter-section section"> -->
+
+      <!-- Section Title -->
+      <!-- <div class="container section-title" data-aos="fade-up">
+        <h2>Starter Section</h2>
+        <p>Starter Section<br></p>
+      </div> -->
+      <!-- End Section Title -->
+
+      <!-- <div class="container" data-aos="fade-up">
+        <H3>{{ book.title }}</H3>
+        <img src="{{ book.book_cover.url }}" alt=""> -->
+        <!-- <p>Use this page as a starter for your own custom pages.</p> -->
+      <!-- </div> -->
+
+    <!-- </section> -->
+    <!-- /Starter Section Section -->
+
+    
+
+
+
+
+
+
+    
+    <!-- content -->
+    <section  id="starter-section" class="starter-section section" >
+      <div class="container">
+        <div class="row gx-5">
+          <aside class="col-lg-6 d-flex flex-column align-items-center">
+            <div class="border rounded-4 mb-3" style="display: inline-block;">
+              <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="{{ book.book_cover.url }}">
+                <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="{{ book.book_cover.url }}" alt="Image not found" width="200" height="300">
+              </a>
+            </div>
+          </aside>
+
+
+          <main class="col-lg-6">
+            <div class="ps-lg-3">
+              <h3 class="title text-light">
+                {{ book.title }}
+              </h3>
+              <div class="d-flex flex-row my-3">
+               
+
+                <!-- <div class="text-warning mb-1 me-2">
+                  {% if average_rating >= 0.5 %}
+                      <i class="bi bi-star-fill"></i>
+                  {% else %}
+                      <i class="bi bi-star"></i>
+                  {% endif %}
+              
+                  {% if average_rating >= 1.5 %}
+                      <i class="bi bi-star-fill"></i>
+                  {% else %}
+                      <i class="bi bi-star"></i>
+                  {% endif %}
+              
+                  {% if average_rating >= 2.5 %}
+                      <i class="bi bi-star-fill"></i>
+                  {% else %}
+                      <i class="bi bi-star"></i>
+                  {% endif %}
+              
+                  {% if average_rating >= 3.5 %}
+                      <i class="bi bi-star-fill"></i>
+                  {% else %}
+                      <i class="bi bi-star"></i>
+                  {% endif %}
+              
+                  {% if average_rating >= 4.5 %}
+                      <i class="bi bi-star-fill"></i>
+                  {% else %}
+                      <i class="bi bi-star"></i>
+                  {% endif %}
+              
+                  <span class="ms-1">
+                      {{ average_rating }}
+                  </span>
+              </div> -->
+
+
+              <div class="text-warning mb-1 me-2">
+                {% for i in "12345" %}
+                    {% if average_rating >= forloop.counter %}
+                        <i class="bi bi-star-fill"></i>
+                    {% elif average_rating >= forloop.counter|add:"-0.5" %}
+                        <i class="bi bi-star-half"></i>
+                    {% else %}
+                        <i class="bi bi-star"></i>
+                    {% endif %}
+                {% endfor %}
+                <span class="ms-1">
+                    {{ average_rating }}
+                </span>
+
+
+              </div>
+                {% if book.copies_available > 0 %}
+                <span class="text-success ms-2">Available</span>
+                {% else %}
+                <span class="text-danger ms-2">Not Available</span>
+                {% endif %}
+              </div>
+    
+              <div class="mb-3">
+                <!-- <span class="h5">₹ {{ book.rate }}</span> -->
+                <!-- <span class="text-muted">/per box</span> -->
+              </div>
+    
+              <div id="descriptionWrapper">
+                <p id="description" class="description">
+                  {{ book.description }}
+                </p>
+              </div>
+              <a href="javascript:void(0);" id="toggleBtn" class="toggle-btn">Read More</a>
+              
+              <br>
+    
+              <div class="row">
+                <dt class="col-3">Genre</dt>
+                <dd class="col-9">{{ book.genres }}</dd>
+    
+                <dt class="col-3">Author</dt>
+                <dd class="col-9">{{ book.author }}</dd>
+
+                <dt class="col-3">Publication Date</dt>
+                <dd class="col-9">{{ book.publication_date|date:"d M Y" }}</dd>
+
+                <dt class="col-3">Copies Available</dt>
+                <dd class="col-9">{{ book.copies_available }}</dd>
+    
+                
+              </div>
+    
+              <hr />
+
+              <!-- Buy E-Book Button -->
+<!-- <a href="/ebook/{{ book.id }}" class="btn btn-warning shadow-0 me-2 rounded-pill px-4 py-2">
+    <i class="fas fa-shopping-cart me-2"></i> Buy E-Book
+</a> -->
+
+
+
+{% if payment.paid %}
+        <!-- Show "View E-Book" button if payment is completed -->
+        <a href="/view_pdf/{{ book.id }}" class="btn btn-success shadow-0 me-2 rounded-pill px-4 py-2">
+            <i class="fas fa-book-open me-2"></i> View E-Book
+        </a>
+    {% else %}
+        <!-- Show "Buy E-Book" button if payment is not completed -->
+        <a href="/ebook/{{ book.id }}" class="btn btn-warning shadow-0 me-2 rounded-pill px-4 py-2">
+            <i class="fas fa-shopping-cart me-2"></i> Buy E-Book
+        </a>
+{% endif %}
+
+<hr>
+<!-- Borrow Button -->
+<!-- <a href="{% url 'request_borrow' book.id %}" class="btn btn-secondary shadow-0 me-2 rounded-pill px-4 py-2">
+    <i class="fas fa-book-reader me-2"></i>Request to Borrow
+</a> -->
+
+{% if borrow_request %}
+
+    {% if borrow_request.status == 'Pending' %}
+        <button class="btn btn-warning shadow-0 me-2 rounded-pill px-4 py-2" disabled>
+            <i class="fas fa-hourglass-half me-2"></i>Request Pending
+        </button>
+    {% elif borrow_request.status == 'Approved' %}
+    <p class="text-info"><strong>Due Date:</strong> {{ borrow_request.due_date|date:"d M Y" }}</p>
+
+       
+
+        <button class="btn btn-success shadow-0 me-2 rounded-pill px-4 py-2" disabled>
+            <i class="fas fa-check-circle me-2"></i>Approved
+        </button>
+        <a href="{% url 'initiate_return_book' borrow_request.id %}" class="btn btn-danger shadow-0 me-2 rounded-pill px-4 py-2">
+            <i class="fas fa-undo me-2"></i>Return Book
+        </a>
+    
+    {% elif borrow_request.status == 'Rejected' %}
+        <button class="btn btn-danger shadow-0 me-2 rounded-pill px-4 py-2" disabled>
+            <i class="fas fa-times-circle me-2"></i>Request Rejected
+        </button>
+        <a href="{% url 'request_borrow' book.id %}" class="btn btn-secondary shadow-0 me-2 rounded-pill px-4 py-2">
+          <i class="fas fa-plus-circle me-2"></i>Request Again
+      </a>
+    {% elif borrow_request.status == 'Returned' %}
+        <button class="btn btn-info shadow-0 me-2 rounded-pill px-4 py-2" disabled>
+            <i class="fas fa-bookmark me-2"></i>Returned
+        </button>
+        <a href="{% url 'request_borrow' book.id %}" class="btn btn-secondary shadow-0 me-2 rounded-pill px-4 py-2">
+          <i class="fas fa-plus-circle me-2"></i>Borrow Again
+      </a>
+    {% endif %}
+{% else %}
+  {% if book.copies_available > 0 %}
+    <a href="{% url 'request_borrow' book.id %}" class="btn btn-dark shadow-0 me-2 rounded-pill px-4 py-2">
+      <i class="fas fa-book-reader me-2"></i>Request to Borrow
+    </a>
+  {% else %}
+  <a href="{% url 'send_reservation' book.id %}" class="btn btn-info shadow-0 me-2 rounded-pill px-4 py-2" >
+    <i class="bi bi-bookmark-plus me-2"></i>Request Reservation
+  </a>
+  {% endif %}
+
+{% endif %}
+
+
+<!-- Save Button -->
+<!-- <a href="#" class="btn btn-light border border-secondary shadow-0 rounded-pill px-4 py-2">
+    <i class="fas fa-bookmark me-2"></i> Save
+</a> -->
+
+{% if wishlist_books %}
+  <!-- Remove Button -->
+
+<a href="{% url 'remove_wishlist' book.id %}" class="btn btn-light border border-secondary shadow-0 rounded-pill px-4 py-2">
+  <i class="bi bi-bookmark-check"></i> Saved
+</a>
+{% else %}
+<!-- Save Button -->
+<a href="{% url 'add_to_wishlist' book.id %}" class="btn btn-light border border-secondary shadow-0 rounded-pill px-4 py-2">
+    <i class="bi bi-bookmark-plus"></i> Save
+</a>
+{% endif %}
+    
+              
+
+            </div>
+          </main>
+        </div>
+      </div>
+      
+    </section>
+    <!-- content -->
+    
+    <section class="border-top py-4">
+      <div class="container">
+        <div class="row gx-4">
+
+
+          <div class="col-lg-8 mb-4">
+            <div class="border rounded-2 px-3 py-2 bg-light shadow-sm">
+                <!-- Pills navs -->
+                <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                    <li class="nav-item d-flex" role="presentation">
+                        <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">
+                            <i class=""></i> Reviews & Ratings
+                        </a>
+                    </li>
+                </ul>
+                <!-- Pills navs -->
+        
+                <!-- Pills content -->
+                <div class="tab-content" id="ex1-content">
+                    <!-- Review & Rating Tab -->
+                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                        <!-- Review Form -->
+
+                        {% if not review_submitted %}
+
+                        <div class="mb-4 p-4 bg-white rounded-2 shadow-sm">
+                            <h5 class="mb-4">Leave a Review</h5>
+                            <form method="post" action="{% url 'submit_review' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <!-- Rating -->
+                                <div class="mb-3">
+                                    <label for="rating" class="form-label">Rating</label>
+                                    <!-- <div class="star-rating">
+                                        {% for i in "54321" %}
+                                            <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required>
+                                            <label for="star{{ i }}" class="star"><i class="fas fa-star"></i></label>
+                                        {% endfor %}
+                                    </div> -->
+
+                                    <input type="hidden" name="bookid" value="{{ book.id }}">
+                                    <!-- <div class="ratings">
+                                      <label for="star-1" class="label">
+                                        <i class="fa fa-star"></i>
+                                      </label>
+                                      <input class="input" type="radio" id="star-1" name="rating" value="1" checked>
+
+                                      <label for="star-2" class="label">
+                                        <i class="bi bi-star"></i>
+                                      </label>
+                                      <input class="input" type="radio" id="star-2" name="rating" value="2">
+
+                                      <label for="star-3" class="label">
+                                        <i class="bi bi-star"></i>
+                                      </label>
+                                      <input class="input" type="radio" id="star-3" name="rating" value="3">
+
+                                      <label for="star-4" class="label">
+                                        <i class="bi bi-star"></i>
+                                      </label>
+                                      <input class="input" type="radio" id="star-4" name="rating" value="4">
+
+                                      <label for="star-5" class="label">
+                                        <i class="bi bi-star"></i>
+                                      </label>
+                                      <input class="input" type="radio" id="star-5" name="rating" value="5">
+
+                                    </div> -->
+
+                                    <div id="full-stars-example">
+                                      <div class="rating-group">
+                                          <input class="rating__input rating__input--none" name="rating" id="rating-none" value="0" type="radio">
+                                          <label aria-label="No rating" class="rating__label" for="rating-none"><i class="rating__icon rating__icon--none fa fa-ban"></i></label>
+
+                                          <label aria-label="1 star" class="rating__label" for="rating-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                          <input class="rating__input" name="rating" id="rating-1" value="1" type="radio">
+
+                                          <label aria-label="2 stars" class="rating__label" for="rating-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                          <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
+
+                                          <label aria-label="3 stars" class="rating__label" for="rating-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                          <input class="rating__input" name="rating" id="rating-3" value="3" type="radio" checked>
+
+                                          <label aria-label="4 stars" class="rating__label" for="rating-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                          <input class="rating__input" name="rating" id="rating-4" value="4" type="radio">
+                                          
+                                          <label aria-label="5 stars" class="rating__label" for="rating-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+                                          <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
+                                      </div>
+                                    
+                                  </div>
+                                  
+                                  
+                              
+                                </div>
+                                <!-- Comment -->
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Comment</label>
+                                    <textarea class="form-control" id="comment" name="review" rows="3" required></textarea>
+                                </div>
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-paper-plane me-2"></i> Submit Review
+                                </button>
+                            </form>
+                        </div>
+
+                        {% else %}
+                          <div class="alert alert-info" role="alert">
+                            Thank you for submitting your review!
+                          </div>
+                        {% endif %}
+        
+                        <!-- Existing Reviews -->
+                        <!-- <h5 class="mt-4 mb-3">Customer Reviews</h5>
+
+                        <div  class="tab-pane fade" id="review">
+                          <div class="review">
+
+                            {% for review in reviews %}
+                            <div class="comments-list">
+                              <div class="item d-flex">
+                                <div class="comment-left">
+                                  <div class="avatar">
+                                    <img src="{% static 'images/img.jpg' %}" alt="not found" width="70" height="70">
+
+                                  </div>
+
+                                  <div class="product-rating">
+                                    <div class="star {% if review.rating > 0 %} on {% endif %}"></div>
+                                    <div class="star {% if review.rating > 1 %} on {% endif %}"></div>
+                                    <div class="star {% if review.rating > 2 %} on {% endif %}"></div>
+                                    <div class="star {% if review.rating > 3 %} on {% endif %}"></div>
+                                    <div class="star {% if review.rating > 4 %} on {% endif %}"></div>
+                                    <div class="star {% if review.rating > 5 %} on {% endif %}"></div>
+
+                                  </div>
+                                </div> 
+
+                                <div class="comment-body">
+                                  <div class="comment-meta">
+                                    <span class="author">{{ review.member_id.member_id.username }}</span> - <span class="time">{{ review.review_date }}</span>
+                                  </div>
+                                  <div class="comment-content">{{ review.review_text }}</div>
+                                </div>
+
+                              </div>
+                            </div>
+
+                            {% empty %}
+                                <div class="alert alert-info" role="alert">
+                                    No reviews yet. Be the first to review this product!
+                                </div>
+
+                            {% endfor %}
+
+
+                          </div>
+                        </div> -->
+
+
+
+
+
+                        <div class="list-group">
+                          <label for="comment" class="form-label">Customer Reviews</label>
+                          {% for review in reviews %}
+
+                              <div class="list-group-item mb-3 p-3 bg-white rounded-2 shadow-sm">
+                                  <div class="d-flex align-items-start mb-2">
+                                      <!-- Profile Picture -->
+                                      <img src="{{ review.member_id.profile_picture.url }}" class="img-fluid rounded-circle me-3" alt="Profile Picture" width="50" height="50">
+                                      
+                                      <!-- Review Details -->
+                                      <div class="flex-grow-1">
+                                          <!-- Username and Date -->
+                                          <div class="d-flex justify-content-between align-items-center mb-2">
+                                              <strong class="text-primary">{{ review.member_id.member_id.username }}</strong>
+                                              <small class="" style="color: #ffffff;">{{ review.review_date|date:"F j, Y" }}</small>
+                                          </div>
+                                          
+                                          <!-- Rating Stars -->
+                                          <div class="mb-2">
+                                              <span class="text-warning">
+                                                  {% for i in "12345" %}
+                                                      {% if forloop.counter <= review.rating %}
+                                                          <i class="fas fa-star"></i> <!-- Filled star -->
+                                                      {% else %}
+                                                          <i class="far fa-star"></i> <!-- Empty star -->
+                                                      {% endif %}
+                                                  {% endfor %}
+                                              </span>
+                                          </div>
+                                          
+                                          <!-- Review Text -->
+                                          <p class="mb-0">{{ review.review_text }}</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          {% empty %}
+                              <div class="alert alert-info" role="alert">
+                                  No reviews yet. Be the first to review this product!
+                              </div>
+                          {% endfor %}
+                      </div>
+
+
+
+                    </div>
+                </div>
+                <!-- Pills content -->
+            </div>
+        </div>
+
+
+
+
+
+        
+
+        <div class="col-lg-4">
+          <div class="px-0 border rounded-2 shadow-0">
+              <div class="card similar-items">
+                  <div class="card-body">
+                      <h5 class="card-title">Similar items</h5>
+      
+                      <div class="d-flex flex-column">
+                          {% for related_book in related_books %}
+                              <div class="d-flex mb-3 align-items-center">
+                                  <a href="/viewbook/{{ related_book.id }}" class="me-3">
+                                      <img src="{{ related_book.book_cover.url }}" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" alt="{{ related_book.title }}" />
+                                  </a>
+                                  <div class="info">
+                                      <a href="/viewbook/{{ related_book.id }}" class="nav-link mb-1">
+                                          {{ related_book.title }} <br />
+                                          {{ related_book.author }}
+                                      </a>
+                                      <!-- <strong class="text-dark">₹ {{ related_book.rate }}</strong> -->
+                                  </div>
+                              </div>
+                          {% empty %}
+                              <div class="alert alert-info" role="alert">
+                                  No similar items found.
+                              </div>
+                          {% endfor %}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+      
+        </div>
+      </div>
+    </section>
+    
+
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="#" class="logo d-flex align-items-center">
+            <span class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script>
+
+    document.getElementById('toggleBtn').addEventListener('click', function () {
+      var descriptionWrapper = document.getElementById('descriptionWrapper');
+      if (descriptionWrapper.classList.contains('expanded')) {
+        descriptionWrapper.classList.remove('expanded');
+        this.textContent = 'Read More';
+      } else {
+        descriptionWrapper.classList.add('expanded');
+        this.textContent = 'Read Less';
+      }
+    });
+    
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  {% if messages %}
+<script>
+    {% for message in messages %}
+        Swal.fire({
+            title: "{{ message.tags|capfirst }}",
+            text: "{{ message }}",
+            icon: "{{ message.tags }}",
+            confirmButtonColor: '#3085d6',
+        });
+    {% endfor %}
+</script>
+{% endif %}
+
+
+</body>
+
+</html>

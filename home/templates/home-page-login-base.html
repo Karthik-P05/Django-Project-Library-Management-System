@@ -1,0 +1,56 @@
+{% extends "home-page-login.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    {% block content001 %}
+
+
+
+    <div class="col-lg-8">
+      <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row gy-4">
+  
+              <!-- Username Field -->
+              <div class="col-md-12">
+                  <div class="form-floating">
+                      <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username Here" required>
+                      <label for="username" style="color: #6c757d;">Username</label>
+                  </div>
+              </div>
+  
+              <!-- Password Field -->
+              <div class="col-md-12">
+                  <div class="form-floating">
+                      <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password Here" required>
+                      <label for="password" style="color: #6c757d;">Password</label>
+                  </div>
+              </div>
+  
+              <!-- Login Button -->
+              <div class="col-md-12 text-center">
+                  <button type="submit" class="btn btn-custom">LOGIN</button>
+              </div>
+  
+              <!-- Forgot Password Link -->
+              <div class="col-md-12 text-center">
+                  <a href="{% url 'ForgotPassword' %}" class="text-muted">Forgot Password?</a>
+              </div>
+  
+              <!-- Sign Up Link -->
+              <div class="col-md-12 text-center">
+                  <p class="text-muted">Don't have an account? <a href="/memberregistration/#register" style="color: #cda45e;">Sign Up</a></p>
+              </div>
+          </div>
+      </form>
+  </div>
+
+    {% endblock content001 %}
+</body>
+</html>

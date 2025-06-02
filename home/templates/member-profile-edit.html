@@ -1,0 +1,827 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Profile Edit</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+
+
+  <style>
+
+    .select-container {
+        position: relative;
+      }
+      
+      
+      select.form-input {
+        appearance: none;
+        padding-right: 32px;
+        width: 100%;
+      }
+
+
+    /* Base Container Styles */
+    .profile-edit-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: #0c0b09;
+      border: 1px solid #cda45e;
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+  
+    .edit-profile-header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+  
+    .edit-profile-header h1 {
+      color: #cda45e;
+      margin-bottom: 0.5rem;
+    }
+  
+    .back-link {
+      color: #aaaaaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+  
+    .back-link:hover {
+      color: #cda45e;
+    }
+  
+    /* Form Sections */
+    .form-section {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #1a1814;
+      border-radius: 8px;
+      border-left: 3px solid #cda45e;
+    }
+  
+    .section-title {
+      color: #cda45e;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+  
+    /* Profile Picture Section */
+    .avatar-upload-area {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+  
+    .avatar-preview {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px solid #cda45e;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+  
+    .avatar-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+    .avatar-initials {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #252422;
+      color: #cda45e;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+  
+    .upload-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+  
+    .upload-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      background: rgba(205, 164, 94, 0.1);
+      color: #cda45e;
+      border: 1px solid #cda45e;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 250px;
+      text-align: center;
+    }
+  
+    .upload-button:hover {
+      background: #cda45e;
+      color: #0c0b09;
+    }
+  
+    .upload-button input {
+      display: none;
+    }
+  
+    .file-name-display {
+      color: #aaaaaa;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+      max-width: 250px;
+      word-break: break-word;
+    }
+  
+    .remove-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #aaaaaa;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+  
+    .remove-checkbox input {
+      margin: 0;
+    }
+  
+    /* Form Grid Layout */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+  
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+  
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #aaaaaa;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  
+    /* Input Fields */
+    .input-container {
+      position: relative;
+    }
+  
+    .form-input,
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: #0c0b09;
+      border: 1px solid #252422;
+      border-radius: 6px;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+  
+    .form-input:focus,
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #cda45e;
+      box-shadow: 0 0 0 2px rgba(205, 164, 94, 0.2);
+    }
+  
+    /* Icons */
+    .edit-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #cda45e;
+      cursor: pointer;
+      font-size: 0.9rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+  
+    .input-container:hover .edit-icon {
+      opacity: 1;
+    }
+  
+    /* Phone Input */
+    .phone-input {
+      display: flex;
+      align-items: center;
+    }
+  
+    .phone-input .prefix {
+      padding: 0.75rem;
+      background: #252422;
+      border: 1px solid #252422;
+      border-radius: 6px 0 0 6px;
+      color: #aaaaaa;
+      font-size: 0.9rem;
+    }
+  
+    .phone-input .input-container {
+      flex-grow: 1;
+    }
+  
+    .phone-input input {
+      border-radius: 0 6px 6px 0;
+    }
+  
+    /* Select Dropdowns */
+    .select-container {
+      position: relative;
+    }
+  
+    .dropdown-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #cda45e;
+      pointer-events: none;
+      font-size: 0.8rem;
+    }
+  
+    .form-group select {
+      appearance: none;
+      padding-right: 2rem;
+    }
+  
+    /* Textarea */
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+  
+    /* Form Actions */
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+  
+    .cancel-btn {
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      color: #aaaaaa;
+      border: 1px solid #252422;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+  
+    .cancel-btn:hover {
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+    }
+  
+    .submit-btn {
+      padding: 0.75rem 2rem;
+      background: #cda45e;
+      color: #0c0b09;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+  
+    .submit-btn:hover {
+      background: #d4b87a;
+      transform: translateY(-2px);
+    }
+  
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .avatar-upload-area {
+        flex-direction: column;
+        align-items: center;
+      }
+  
+      .upload-controls {
+        align-items: center;
+        text-align: center;
+      }
+  
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+  
+      .phone-input {
+        flex-direction: column;
+        align-items: stretch;
+      }
+  
+      .phone-input .prefix {
+        border-radius: 6px 6px 0 0;
+        text-align: center;
+      }
+  
+      .phone-input input {
+        border-radius: 0 0 6px 6px;
+      }
+  
+      .form-actions {
+        flex-direction: column;
+      }
+  
+      .cancel-btn,
+      .submit-btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Updated: Jun 27 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="starter-page-page">
+
+  <header id="header" class="header fixed-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7356 66 55677</span></i>
+        </div>
+        <div class="languages d-none d-md-flex align-items-center">
+          <ul>
+            <li>En</li>
+            <li><a href="#">De</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+          <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1><br>
+
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/memberhomepage">Home<br></a></li>
+            <li><a href="/memberviewwishlist">Whishlist</a></li>
+            <li><a href="/memberebook">E-book</a></li>
+            <li><a href="/viewissuedbook">Issued Books</a></li>
+            <li><a href="/viewborrowingdetails">Borrowing History</a></li>
+            <li><a href="/viewreservations">My Reservations</a></li>
+            <li><a href="/viewfinepayment">Fines & Payments</a></li>
+            <li><a href="/memberprofile" class="active">View Profile</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-book-a-table d-none d-xl-block" href="/memberhomepage">Home</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title position-relative" data-aos="fade" style="background-image: url(/static/assets/img/pae-title-bg.webp);">
+      <div class="container position-relative">
+        <h1>Edit Profile <br></h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/memberhomepage">Home</a></li>
+            <li><a href="/memberprofile">Student Profile</a></li>
+            <li class="current">Edit Profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Starter Section Section -->
+    <section id="starter-section" class="starter-section section">
+
+     
+
+
+        <div class="profile-edit-container">
+            <div class="edit-profile-header">
+              <h1>Edit Your Profile</h1>
+              <a href="/memberprofile" class="back-link">← Back to Profile</a>
+            </div>
+          
+            <form method="POST" action="/memberprofileupdate/" enctype="multipart/form-data" class="profile-edit-form">
+              {% csrf_token %}
+              
+              <!-- Profile Picture Section -->
+              <div class="form-section">
+                <h2 class="section-title">Profile Photo</h2>
+                <div class="avatar-upload-area">
+                  <div class="avatar-preview">
+                    {% if view.profile_picture %}
+                      <img src="{{ view.profile_picture.url }}" id="avatar-preview" class="avatar-image">
+                    {% else %}
+                      <div class="avatar-initials">
+                        {{ request.user.first_name|first }}{{ request.user.last_name|first }}
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="upload-controls">
+                    <label for="id_profile_picture" class="upload-button">
+                      <span class="button-text">Change Profile Picture</span>
+                      <input type="file" id="id_profile_picture" class="file-upload-btn" name="profile_picture">
+                    </label>
+                    
+                    <div id="file-name" class="file-name-display">No file selected</div>
+                    
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Personal Information -->
+              <div class="form-section">
+                <h2 class="section-title">Personal Information</h2>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="id_first_name">First Name</label>
+                    <div class="input-container">
+                      <input type="text" id="id_first_name" name="first_name" value="{{ request.user.first_name }}" class="form-input">
+                      
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="id_last_name">Last Name</label>
+                    <div class="input-container">
+                      <input type="text" id="id_last_name" name="last_name" value="{{ request.user.last_name }}" class="form-input">
+                      
+                    </div>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="id_email">Email</label>
+                    <div class="input-container">
+                        <input type="email" id="id_email" name="email" value="{{ request.user.email }}" class="form-input">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Contact Information -->
+              <div class="form-section">
+                <h2 class="section-title">Contact Information</h2>
+                <div class="form-grid">
+                  <div class="form-group full-width">
+                    <label for="id_phone_number">Phone Number</label>
+                    <div class="phone-input">
+                      <span class="prefix">+91</span>
+                      <div class="input-container">
+                        <input type="tel" id="id_phone_number" name="phone_number" value="{{ view.phone_number }}" class="form-input">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group full-width">
+                    <label for="id_address">Address</label>
+                    <div class="input-container">
+                        <textarea id="id_address" name="address" class="form-input">{{ view.address }}</textarea>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <!-- Academic Information -->
+              <div class="form-section">
+                <h2 class="section-title">Academic Information</h2>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="id_department">Department</label>
+                    <div class="select-container">
+                        <select name="department" id="department" class="form-input floating-select">
+                            <option value="{{ view.department }}"  selected>{{ view.department }}</option>
+                            <option value="Computer Science and Engineering">Computer Science and Engineering</option>
+                            <option value="Electrical Engineering">Electrical Engineering</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Civil Engineering">Civil Engineering</option>
+                            <option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+                            <option value="Biomedical Engineering">Biomedical Engineering</option>
+                            <option value="Chemical Engineering">Chemical Engineering</option>
+                            <option value="Aerospace Engineering">Aerospace Engineering</option>
+                            <option value="Environmental Engineering">Environmental Engineering</option>
+                            <option value="Industrial Engineering">Industrial Engineering</option>
+                            <option value="Materials Science and Engineering">Materials Science and Engineering</option>
+                        </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="id_year_of_study">Year of Study</label>
+                    <div class="select-container">
+                      <select name="year" id="id_year_of_study" class="form-input">
+                            <option value="{{ view.year_of_study }}" selected >{{ view.year_of_study }}</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="form-actions">
+                <button type="button" class="cancel-btn" id="custom-reset-btn">Reset Changes</button>
+                <button type="submit" class="submit-btn">Save Profile</button>
+              </div>
+            </form>
+          </div>
+          
+          
+          
+          <script>
+            // Profile Picture Handling
+            document.getElementById('id_profile_picture').addEventListener('change', function(e) {
+              const file = e.target.files[0];
+              const fileNameDisplay = document.getElementById('file-name');
+              
+              if (file) {
+                fileNameDisplay.textContent = file.name;
+                
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                  const preview = document.getElementById('avatar-preview');
+                  if (preview) {
+                    preview.src = event.target.result;
+                  } else {
+                    const initialsDiv = document.querySelector('.avatar-initials');
+                    if (initialsDiv) {
+                      initialsDiv.innerHTML = `<img src="${event.target.result}" class="avatar-image">`;
+                    }
+                  }
+                };
+                reader.readAsDataURL(file);
+              } else {
+                fileNameDisplay.textContent = 'No file selected';
+              }
+            });
+          
+            // Handle remove photo checkbox
+            document.getElementById('profile_picture-clear_id').addEventListener('change', function(e) {
+              if (this.checked) {
+                document.getElementById('id_profile_picture').value = '';
+                document.getElementById('file-name').textContent = 'Photo will be removed';
+              } else {
+                document.getElementById('file-name').textContent = 'No file selected';
+              }
+            });
+          
+            // Add click functionality to edit icons
+            document.querySelectorAll('.edit-icon').forEach(icon => {
+              icon.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input, textarea, select');
+                input.focus();
+              });
+            });
+          
+            // Enhance select dropdowns
+            document.querySelectorAll('.form-group select').forEach(select => {
+              select.addEventListener('change', function() {
+                this.style.color = '#ffffff';
+              });
+              
+              // Set initial color
+              if (select.value) {
+                select.style.color = '#ffffff';
+              }
+            });
+
+
+            document.querySelector('.cancel-btn').addEventListener('click', function() {
+                // Reset entire form
+                document.querySelector('.profile-edit-form').reset();
+                
+                // Manually handle the image reset
+                const preview = document.getElementById('avatar-preview');
+                if (preview && "{{ view.profile_picture.url }}") {
+                  preview.src = "{{ view.profile_picture.url }}";
+                } else {
+                  document.querySelector('.avatar-initials').style.display = 'flex';
+                }
+              });
+            
+          </script>
+
+          <script>
+            document.getElementById('custom-reset-btn').addEventListener('click', function() {
+              // 1. Reset all regular form fields
+              document.querySelector('.profile-edit-form').reset();
+              
+              // 2. Special handling for profile picture
+              const fileInput = document.getElementById('id_profile_picture');
+              fileInput.value = '';
+              
+              // 3. Reset the preview
+              {% if view.profile_picture %}
+                // If there was an original image
+                const preview = document.getElementById('avatar-preview');
+                if (preview) {
+                  preview.src = "{{ view.profile_picture.url }}";
+                }
+              {% else %}
+                // If no original image, show initials
+                const initialsDiv = document.querySelector('.avatar-initials');
+                if (initialsDiv) {
+                  initialsDiv.innerHTML = '{{ request.user.first_name|first }}{{ request.user.last_name|first }}';
+                  initialsDiv.style.display = 'flex'; // Make sure it's visible
+                }
+              {% endif %}
+              
+              // 4. Reset the filename display
+              document.getElementById('file-name').textContent = 'No file selected';
+              
+             
+            });
+            </script>
+
+           <!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% if messages %}
+<script>
+  {% for message in messages %}
+    Swal.fire({
+      icon: '{% if message.tags == "success" %}success{% elif message.tags == "error" %}error{% elif message.tags == "warning" %}warning{% else %}info{% endif %}',
+      title: '{{ message.tags|capfirst }}',
+      text: '{{ message }}',
+      timer: 3000,
+      showConfirmButton: true
+    });
+  {% endfor %}
+</script>
+{% endif %}
+
+
+
+
+
+
+      <!-- <div class="container" data-aos="fade-up">
+        <p>Use this page as a starter for your own custom pages.</p>
+      </div> -->
+
+    </section><!-- /Starter Section Section -->
+
+    
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="#" class="logo d-flex align-items-center">
+            <span class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

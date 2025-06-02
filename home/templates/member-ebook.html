@@ -1,0 +1,547 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>E-books</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favi.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Restaurantly
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Updated: Jun 27 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+
+  <style>
+    /* Base Styles */
+    :root {
+      --primary: #0c0b09;
+      --secondary: #1a1814;
+      --accent: #cda45e;
+      --text: #ffffff;
+      --text-light: #e0e0e0;
+      --border: #333333;
+      --success: #4ade80;
+    }
+
+    
+    .profile-card {
+      background: var(--primary);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      color: var(--text);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Header Section */
+    .profile-header {
+      display: flex;
+      gap: 25px;
+      padding-bottom: 25px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .avatar-section {
+      flex-shrink: 0;
+    }
+    
+    .avatar-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+    }
+    
+    .avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+    }
+    
+    .avatar-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      border: 3px solid var(--accent);
+    }
+    
+    .avatar-edit-btn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: rgba(0, 0, 0, 0.7);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 20px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .avatar-edit-btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+    
+    .profile-basic-info {
+      flex: 1;
+    }
+    
+    .profile-title {
+      margin: 0 0 10px 0;
+      font-size: 28px;
+      color: var(--accent);
+    }
+    
+    .profile-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .meta-badge {
+      background: rgba(205, 164, 94, 0.1);
+      color: var(--accent);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      border: 1px solid var(--accent);
+    }
+    
+    /* Details Section */
+    .profile-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+    
+    .detail-section {
+      background: var(--secondary);
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 3px solid var(--accent);
+    }
+    
+    .section-title {
+      margin: 0 0 15px 0;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+    }
+    
+    .detail-row {
+      display: flex;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(205, 164, 94, 0.1);
+    }
+    
+    .detail-row:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .detail-label {
+      width: 100px;
+      flex-shrink: 0;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    
+    .detail-content {
+      flex: 1;
+      word-break: break-word;
+    }
+    
+    .email-content {
+      word-break: break-all;
+    }
+    
+    .address-row {
+      align-items: flex-start;
+    }
+    
+    .address-content {
+      flex: 1;
+      white-space: pre-line;
+      word-break: break-word;
+    }
+    
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .status-badge.active {
+      background: rgba(74, 222, 128, 0.1);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    
+    /* Action Buttons */
+    .profile-actions {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .edit-btn {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 10px 25px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .edit-btn:hover {
+      background: var(--accent);
+      color: var(--primary);
+    }
+    
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .profile-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .detail-row {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .detail-label {
+        width: 100%;
+      }
+    }
+   
+      .book-card {
+          transition: all 0.3s ease;
+          border: 1px solid rgba(0,0,0,0.08) !important;
+      }
+      
+      .book-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.1) !important;
+          border-color: transparent !important;
+      }
+      
+      .book-cover {
+          transition: transform 0.5s ease;
+      }
+      
+      .book-card:hover .book-cover {
+          transform: scale(1.03);
+      }
+      
+      .read-btn {
+          transition: all 0.3s ease;
+          background: linear-gradient(135deg, #28a745 0%, #5cb85c 100%);
+          border: none;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+      }
+      
+      .read-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3) !important;
+      }
+      
+      .book-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 20%);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+          pointer-events: none;
+      }
+      
+      .book-card:hover .book-overlay {
+          opacity: 1;
+      }
+      
+      @media (max-width: 576px) {
+          .gallery-item {
+              padding: 1rem !important;
+          }
+          .book-cover {
+              height: 220px !important;
+          }
+      }
+  </style>
+    
+</head>
+
+<body class="starter-page-page">
+
+  <header id="header" class="header fixed-top">
+
+    <div class="topbar d-flex align-items-center">
+      <div class="container d-flex justify-content-center justify-content-md-between">
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">librarymanagement@example.com</a></i>
+          <i class="bi bi-phone d-flex align-items-center ms-4"><span>+91 7355 66 55677</span></i>
+        </div>
+        <div class="languages d-none d-md-flex align-items-center">
+          <ul>
+            <li>En</li>
+            <li><a href="#">De</a></li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- End Top Bar -->
+
+    <div class="branding d-flex align-items-cente">
+
+      <div class="container position-relative d-flex align-items-center justify-content-between">
+        <a href="{% url 'homepage' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'assets/img/logo.png' %}" alt=""> -->
+          <h1 class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</h1><br>
+
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="/memberhomepage">Home<br></a></li>
+            <li><a href="/memberviewwishlist">Whishlist</a></li>
+            <li><a href="/memberebook" class="active">E-book</a></li>
+            <li><a href="/viewissuedbook">Issued Books</a></li>
+            <li><a href="/viewborrowingdetails">Borrowing History</a></li>
+            <li><a href="/viewreservations">My Reservations</a></li>
+            <li><a href="/viewfinepayment">Fines & Payments</a></li>
+            <li><a href="/memberprofile">View Profile</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-book-a-table d-none d-xl-block" href="/memberhomepage">Back</a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title position-relative" data-aos="fade" style="background-image: url(/static/assets/img/pae-title-bg.webp);">
+      <div class="container position-relative">
+        <h1>E-Books<br></h1>
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="{% url 'member_homepage' %}">Home</a></li>
+            <li class="current">View Ebooks</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <!-- End Page Title -->
+
+    <!-- Starter Section Section -->
+    <section id="starter-section" class="starter-section section">
+
+     
+
+      {% if not books %}
+      <div class="alert alert-info">
+          <i class="bi bi-info-circle me-2"></i>You haven't purchased any books yet!
+      </div>
+      {% else %}
+
+
+      <div class="container-fluid " data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4 gx-3 justify-content-center">
+            {% for book in books %}
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                <div class="gallery-item h-100 text-center p-3 shadow-sm rounded-3 border-0 bg-white position-relative overflow-hidden book-card">
+                    <!-- Book Cover with Hover Effect -->
+                    <a href="/viewbook/{{ book.book_id_id }}" class="d-block overflow-hidden rounded-top">
+                        <img src="{{ book.book_id.book_cover.url }}" 
+                             alt="{{ book.book_id.title }}"
+                             class="img-fluid w-100 book-cover"
+                             style="height: 280px; object-fit: cover; transition: transform 0.4s ease;">
+                    </a>
+                  
+                    <!-- Book Actions -->
+                    <div class="gallery-links mt-3 d-flex align-items-center justify-content-center">
+                        <a href="/view_pdf/{{ book.book_id_id }}" 
+                           class="btn btn-success shadow-sm rounded-pill px-3 py-2 read-btn"
+                           style="min-width: 120px;">
+                          <i class="bi bi-book me-2"></i> Read Now
+                        </a>
+                    </div>
+    
+                    <!-- Hover Overlay Effect -->
+                    <div class="book-overlay"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% endif %}
+    
+    
+
+
+      <!-- <div class="container" data-aos="fade-up">
+        <p>Use this page as a starter for your own custom pages.</p>
+      </div> -->
+
+    </section><!-- /Starter Section Section -->
+
+    
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container footer-top">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="#" class="logo d-flex align-items-center">
+            <span class="sitename" style="line-height: 0.9;">Library<br>Management<br>System</span>
+          </a>
+          <div class="footer-contact pt-3">
+            <p>A108 Adam Street</p>
+            <p>New York, NY 535022</p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
+            <p><strong>Email:</strong> <span>info@example.com</span></p>
+          </div>
+          <div class="social-links d-flex mt-4">
+            <a href=""><i class="bi bi-twitter-x"></i></a>
+            <a href=""><i class="bi bi-facebook"></i></a>
+            <a href=""><i class="bi bi-instagram"></i></a>
+            <a href=""><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Product Management</a></li>
+            <li><a href="#">Marketing</a></li>
+            <li><a href="#">Graphic Design</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4>Our Newsletter</h4>
+          <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+          <form action="forms/newsletter.php" method="post" class="php-email-form">
+            <div class="newsletter-form"><input type="email" name="email"><input type="submit" value="Subscribe"></div>
+            <div class="loading">Loading</div>
+            <div class="error-message"></div>
+            <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container copyright text-center mt-4">
+      <p>© <span>Copyright</span> <strong class="px-1 sitename">Restaurantly</strong> <span>All Rights Reserved</span></p>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+  <!-- Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>
