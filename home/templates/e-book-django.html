@@ -27,6 +27,7 @@
 
   <!-- Main CSS File -->
   <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <!-- =======================================================
   * Template Name: Restaurantly
@@ -318,7 +319,7 @@
                     description: 'Payment for {{ book.title }}',
                     order_id: data.order_id,
                     handler: function (response) {
-                      alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
+                      //alert('Payment successful! Payment ID: ' + response.razorpay_payment_id);
                       // Send payment details to verify_payment endpoint
                       fetch('/verify_payment/', {
                           method: 'POST',
@@ -331,10 +332,25 @@
                       .then(response => response.json())
                       .then(data => {
                           if (data.status === 'success') {
-                              window.location.href = '/viewbook/{{ book.id }}';  // Redirect to a success page
+                              Swal.fire({
+                                  title: 'Purchase Successful',
+                                  text: 'Thank you for your purchase! Redirecting you to your book...',
+                                  icon: 'success',
+                                  confirmButtonText: 'View Book',
+                                  confirmButtonColor: '#3085d6'
+                              }).then(() => {
+                                  window.location.href = '/viewbook/{{ book.id }}';  // Redirect to book details
+                              });
                           } else {
-                              alert('Payment verification failed: ' + data.message);
+                              Swal.fire({
+                                  title: 'Payment Failed ❌',
+                                  text: 'We were unable to verify your payment. Reason: ' + data.message,
+                                  icon: 'error',
+                                  confirmButtonText: 'Try Again',
+                                  confirmButtonColor: '#d33'
+                              });
                           }
+
                       })
                       .catch(error => {
                           console.error('Error:', error);

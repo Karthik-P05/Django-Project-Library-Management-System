@@ -36,6 +36,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <style>
     /* General styling */
@@ -408,12 +409,24 @@ body {
                           .then(response => response.json())
                           .then(data => {
                               if (data.status === 'success') {
-                                  alert('Payment successful!');
-                                  //window.location.reload(); // Reload the page to update the UI
-                                  window.location.href = '/viewbook/{{ borrow_details.book_id_id }}';
+                                  Swal.fire({
+                                      title: 'Payment Complete',
+                                      text: 'Your transaction was successful! You can now view your book details.',
+                                      icon: 'success',
+                                      confirmButtonText: 'View Book',
+                                      confirmButtonColor: '#3085d6'
+                                  }).then(() => {
+                                      window.location.href = '/viewbook/{{ borrow_details.book_id_id }}';
+                                  });
                               } else {
-                                  alert('Payment verification failed: ' + data.message);
+                                  Swal.fire({
+                                      title: 'Payment Failed ❌',
+                                      text: 'We could not verify your payment. Please try again or contact support.\nReason: ' + data.message,
+                                      icon: 'error',
+                                      confirmButtonText: 'Try Again'
+                                  });
                               }
+
                           });
                       },
                       theme: {
